@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+:root {
+    --primary-color: #371f1f;
+    --black-color: #19191FFF;
+    --brown-color: #DAB88BFF;
+}
+
+* {
+    font-family: "Inter", sans-serif;
+}
+
+.primary-btn {
+    padding: 5px 12px!important; 
+    color: #F3F4F6FF!important; 
+    background-color: var(--primary-color)!important; 
+    font-size: 14px; 
+    transition: all ease-in-out 0.3s;
+}
+
+.primary-btn:hover, 
+.primary-btn:active, 
+.primary-btn:focus {
+    opacity: 0.8;
+}
+
+.grey-btn {
+    padding: 5px 12px!important; 
+    color: #323742FF!important; 
+    background-color: #F3F4F6FF!important; 
+    font-size: 14px; 
+    transition: all ease-in-out 0.3s;
+}
+
+.grey-btn:hover, 
+.grey-btn:active, 
+.grey-btn:focus {
+    opacity: 0.8;
+}
+
+nav {
+    box-shadow:0px 0px 1px #171A1F;
+}
+
+.navbar-nav .nav-item a:hover {
+    color: var(--primary-color);
+}
+
+.navbar-text img {
+    max-width: 30px;
+    border-radius: 50%;
+}
+
+.navbar-nav .active {
+    color: var(--primary-color)!important;
+    font-weight: 600;
+}
+
+.navbar-toggler {
+    box-shadow: none!important;
+    border: none;
+}
+
+.navbar-toggler[aria-expanded="true"] {
+    border: var(--primary-color) 2px solid;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    
+}
+
+.title h2 {
+    font-size: 2.5rem;
+    font-family: "Lora", serif;
+    font-weight: 700;
+}
+
+.title i {
+    padding-top: 0.5rem;
+    font-size: 2rem;
+} 
+
+footer {
+    border-top: #E5E7EBFF solid 1px;
+}
+
+footer a {
+    color: var(--primary-color);
+}
+
+footer a:hover {
+    opacity: 0.9;
+}

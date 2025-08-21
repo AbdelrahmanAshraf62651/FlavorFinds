@@ -1,0 +1,227 @@
+.landing {
+    background-image: url("../images/login.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.landing {
+    min-height: calc(100vh - 40.8px);
+}
+
+/* Checkbox Styling */
+.form-check-input {
+    accent-color: var(--primary-color);
+}
+
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.form-check-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(55, 31, 31, 0.25);
+}
+
+.landing .filter {
+    height: 100%;
+    width: 100%;
+    background-color: #2f303020;
+    top: 0;
+    left: 0;
+}
+
+.landing h1 {
+    font-family: "Lora", serif;
+    font-size: 60px; 
+    line-height: 75px; 
+    font-weight: 800; 
+    color: #F3F4F6FF;
+    text-shadow: var(--primary-color) 1px 1px;
+}
+
+.landing input {
+    max-width: 768px;
+}
+
+.login-container {
+    max-width: 450px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.login-container h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.login-container p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.login-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Tab Styling */
+.nav-tabs {
+    border-bottom: 2px solid #e9ecef;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    color: #6c757d;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px 8px 0 0;
+    transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover {
+    border: none;
+    color: var(--primary-color);
+    background-color: rgba(55, 31, 31, 0.1);
+}
+
+.nav-tabs .nav-link.active {
+    border: none;
+    color: var(--primary-color);
+    background-color: transparent;
+    border-bottom: 3px solid var(--primary-color);
+    font-weight: 600;
+}
+
+.nav-tabs .nav-link i {
+    font-size: 0.9rem;
+}
+
+/* Form Styling */
+.login-form .form-label,
+.signup-form .form-label {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.login-form .form-control,
+.signup-form .form-control {
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.login-form .form-control:focus,
+.signup-form .form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(55, 31, 31, 0.25);
+}
+
+.login-form .form-check-label,
+.signup-form .form-check-label {
+    color: var(--primary-color);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.forgot-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.forgot-link:hover {
+    opacity: 0.8;
+    color: var(--primary-color);
+}
+
+.terms-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+}
+
+.terms-link:hover {
+    opacity: 0.8;
+    color: var(--primary-color);
+}
+
+.login-form .btn,
+.signup-form .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 8px;
+}
+
+/* Tab Content Animation */
+.tab-pane {
+    transition: all 0.3s ease;
+}
+
+.tab-pane.fade {
+    opacity: 0;
+}
+
+.tab-pane.fade.show {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .login-container {
+        max-width: 400px;
+    }
+    
+    .login-container h1 {
+        font-size: 2.5rem;
+    }
+    
+    .login-container p {
+        font-size: 1rem;
+    }
+    
+    .login-card {
+        padding: 1.5rem;
+    }
+    
+    .nav-tabs .nav-link {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 0 15px;
+        max-width: 350px;
+    }
+    
+    .login-container h1 {
+        font-size: 2rem;
+    }
+    
+    .login-card {
+        padding: 1rem;
+    }
+    
+    .nav-tabs .nav-link {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.85rem;
+    }
+    
+    .nav-tabs .nav-link i {
+        display: none;
+    }
+}

@@ -1,0 +1,28 @@
+.container h2 {
+    font-size: 48px;
+    font-family: "Lora", serif;
+    font-weight: 700;
+}
+
+.card .card-body .card-title {
+    max-height: 192px;
+    font-family: "Lora", serif;
+    line-height: 28px; 
+    font-weight: 600;
+}
+
+.card .card-body .star-system i {
+    padding-top: 0.37rem;
+    color: var(--brown-color);
+    font-size: 0.8rem;
+}
+
+.card-footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 1rem!important;
+    background-color: inherit!important;
+}
+
+.card .card-footer button:hover {
+    opacity: 0.9;
+}

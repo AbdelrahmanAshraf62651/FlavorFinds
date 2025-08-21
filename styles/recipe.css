@@ -1,0 +1,43 @@
+.recipe-header {
+	border-bottom: 1px solid #E5E7EBFF;
+}
+
+h1, h4 {
+	font-family: "Lora", serif;
+}
+
+.recipe-hero img {
+	width: 100%;
+	height: auto;
+	border-radius: 8px;
+}
+
+.meta-badges .badge {
+	background-color: #F3F4F6FF;
+	color: var(--black-color);
+	font-weight: 500;
+	padding: 0.5rem 0.75rem;
+	margin-right: 0.5rem;
+}
+
+.ingredients .list-group-item {
+	border: 0;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.step-number {
+	background: var(--brown-color);
+	color: #fff;
+	border-radius: 50%;
+	width: 28px;
+	height: 28px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 700;
+	margin-right: 10px;
+}
+
+.recipe-actions .btn {
+	min-width: 160px;
+}
