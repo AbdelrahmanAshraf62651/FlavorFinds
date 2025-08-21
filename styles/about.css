@@ -1,0 +1,87 @@
+.landing {
+    min-height: calc(100vh - 56px);
+    background-image: url("../images/about landing.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.landing .filter {
+    height: 100%;
+    width: 100%;
+    background-color: #2f30306b;
+    top: 0;
+    left: 0;
+}
+
+.landing h1 {
+    font-family: "Lora", serif;
+    font-size: 60px; 
+    line-height: 75px; 
+    font-weight: 800; 
+    max-width: 400px;
+    color: white;
+}
+
+.landing p {
+    max-width: 400px;
+}
+
+.landing .container .primary-btn {
+    border-radius: 0px;
+}
+
+.landing .container .grey-btn {
+    background-color: rgba(255, 255, 255, 0)!important;
+    border: #F3F4F6FF 1px solid!important;
+    border-radius: 0px;
+    color: #2f303000!important;
+}
+
+.landing .container .grey-btn:hover {
+    color: #F3F4F6FF!important;
+}
+
+.container h2 {
+    font-size: 48px;
+    font-family: "Lora", serif;
+    font-weight: 700;
+}
+
+.card .card-body i {
+    color: var(--primary-color);
+}
+
+.card .card-body img {
+    max-width: 100px;
+    border-radius: 50%;
+}
+
+.card .card-body h5 {
+    max-width: 200px;
+}
+
+.card .card-body p {
+    max-width: 250px;
+}
+
+.contact p {
+    max-width: 650px;
+}
+
+.contact form input {
+    padding: 5px 5px; 
+    font-size: 14px; 
+    border: 1px solid #DEE1E6FF;
+}
+
+.contact form input:focus {
+    outline: none!important;
+}
+
+@media  (max-width: 600px) {
+    .landing h1 {
+        font-size: 50px;
+    }
+}

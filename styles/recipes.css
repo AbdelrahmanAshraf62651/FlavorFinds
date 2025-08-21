@@ -1,0 +1,51 @@
+.title button {
+    max-width: 200px;
+}
+
+.card .card-top .btn {
+    top: 18px;
+    left: 15px;
+    font-weight: 500;
+    font-size: 12px;
+    transition: all ease-in-out 0.2s;
+}
+
+.card .card-top .btn:hover {
+    background-color: rgba(255, 255, 255, 0) !important;
+    border: rgba(255, 255, 255, 0) solid 1px !important;
+}
+
+.card .card-body .card-title {
+    max-height: 192px;
+    font-family: "Lora", serif;
+    line-height: 28px; 
+    font-weight: 600;
+}
+
+.card .card-body .star-system i {
+    padding-top: 0.37rem;
+    color: var(--brown-color);
+    font-size: 0.8rem;
+}
+
+.card-footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 1rem!important;
+    background-color: inherit!important;
+}
+
+.card .clock i {
+    color: var(--primary-color);
+}
+
+.card .card-footer .btn {
+    max-width: 120px;
+    background-color: var(--primary-color)!important;
+    border: none!important;
+    font-weight: 500;
+    transition: all ease-in-out 0.2s;
+}
+
+.card .card-footer .btn:hover {
+    opacity: 0.9;
+}
