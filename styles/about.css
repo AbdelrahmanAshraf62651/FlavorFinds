@@ -2,7 +2,6 @@
     min-height: calc(100vh - 56px);
     background-image: url("../images/about landing.jpg");
     background-repeat: no-repeat;
-    background-attachment: fixed;
     background-size: cover;
     overflow: hidden;
 }

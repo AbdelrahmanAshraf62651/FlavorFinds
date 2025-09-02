@@ -1,0 +1,375 @@
+[
+    {
+        "id": 1,
+        "title": "Chicken Tikka Masala",
+        "image": "images/recipes/img1.png",
+        "description": "Tender chicken pieces in a creamy, spiced tomato sauce.",
+        "link": "recipes/chicken-tikka-masala.html",
+        "category": "Main Dish",
+        "prepTime": "1 hr 10 min",
+        "trending": true,
+        "rate": 4.6,
+        "ingredients": [
+            "500g chicken breast, cubed",
+            "1 cup plain yogurt",
+            "2 tbsp tikka masala spice blend",
+            "1 onion, finely chopped",
+            "2 cups tomato puree",
+            "1/2 cup heavy cream",
+            "2 cloves garlic, minced",
+            "1-inch ginger, grated",
+            "Salt and pepper to taste"
+        ],
+        "instructions": [
+            "Marinate chicken with yogurt, lemon, garlic, ginger, and spices. Chill 30 minutes.",
+            "Sear marinated chicken until lightly charred; set aside.",
+            "Make sauce: sauté onion and spices, add tomato puree, simmer; finish with cream.",
+            "Combine chicken with sauce; simmer 10 minutes. Garnish with cilantro."
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Vegan Chocolate Cake",
+        "image": "images/recipes/img2.png",
+        "description": "Rich and moist chocolate cake made without eggs or dairy.",
+        "link": "recipes/vegan-chocolate-cake.html",
+        "category": "Dessert",
+        "prepTime": "1 hr 15 min",
+        "trending": true,
+        "rate": 4.4,
+        "ingredients": [
+            "2 cups flour",
+            "1 cup cocoa powder",
+            "1 1/2 cups sugar",
+            "1 cup plant milk",
+            "1/2 cup vegetable oil",
+            "1 tbsp baking powder",
+            "1 tsp vanilla extract",
+            "Pinch of salt"
+        ],
+        "instructions": [
+            "Preheat oven to 180°C (350°F).",
+            "Mix dry ingredients in one bowl and wet ingredients in another.",
+            "Combine and stir until smooth.",
+            "Pour into a greased cake pan and bake 35–40 minutes."
+        ]
+    },
+    {
+        "id": 3,
+        "title": "Grilled Salmon & Asparagus",
+        "image": "images/recipes/img3.png",
+        "description": "Healthy grilled salmon served with tender asparagus.",
+        "link": "recipes/grilled-salmon-asparagus.html",
+        "category": "Seafood",
+        "prepTime": "10 min",
+        "chef": true,
+        "rate": 3.9,
+        "ingredients": [
+            "2 salmon fillets",
+            "1 bunch asparagus",
+            "2 tbsp olive oil",
+            "1 lemon, sliced",
+            "Salt and pepper"
+        ],
+        "instructions": [
+            "Preheat grill or pan.",
+            "Season salmon and asparagus with olive oil, salt, and pepper.",
+            "Grill salmon 4–5 min per side.",
+            "Grill asparagus until tender; serve with lemon."
+        ]
+    },
+    {
+        "id": 4,
+        "title": "Zesty Beef Taco Salad",
+        "image": "images/recipes/img4.png",
+        "description": "A fresh salad with seasoned beef and zesty flavors.",
+        "link": "recipes/zesty-beef-taco-salad.html",
+        "category": "Main Dish",
+        "prepTime": "35 min",
+        "chef": true,
+        "rate": 4.0,
+        "ingredients": [
+            "300g ground beef",
+            "1 packet taco seasoning",
+            "2 cups lettuce, shredded",
+            "1 tomato, diced",
+            "1 avocado, sliced",
+            "1/2 cup cheddar cheese, shredded",
+            "Tortilla chips"
+        ],
+        "instructions": [
+            "Cook beef with taco seasoning until browned.",
+            "Arrange lettuce in a bowl, top with beef, tomato, avocado, and cheese.",
+            "Add tortilla chips on the side and serve."
+        ]
+    },
+    {
+        "id": 5,
+        "title": "Spicy Red Lentil Soup",
+        "image": "images/recipes/img5.png",
+        "description": "Hearty red lentil soup with warming spices.",
+        "link": "recipes/spicy-red-lentil-soup.html",
+        "category": "Soup",
+        "prepTime": "45 min",
+        "trending": true,
+        "rate": 5,
+        "ingredients": [
+            "1 cup red lentils",
+            "1 onion, chopped",
+            "2 carrots, chopped",
+            "2 cloves garlic, minced",
+            "1 tsp cumin",
+            "1 tsp chili flakes",
+            "4 cups vegetable broth",
+            "Salt and pepper"
+        ],
+        "instructions": [
+            "Sauté onion, carrots, and garlic until soft.",
+            "Add lentils, spices, and broth.",
+            "Simmer 25–30 minutes until lentils are tender.",
+            "Blend if desired for a creamy texture."
+        ]
+    },
+    {
+        "id": 6,
+        "title": "Quick Tofu Stir-Fry",
+        "image": "images/recipes/img6.png",
+        "description": "A fast and flavorful vegan stir fry with tofu and veggies.",
+        "link": "recipes/quick-tofu-stir-fry.html",
+        "category": "Vegan",
+        "prepTime": "20 min",
+        "trending": true,
+        "chef": true,
+        "rate": 4.8,
+        "ingredients": [
+            "200g tofu, cubed",
+            "1 bell pepper, sliced",
+            "1 zucchini, sliced",
+            "2 tbsp soy sauce",
+            "1 tbsp sesame oil",
+            "1 garlic clove, minced"
+        ],
+        "instructions": [
+            "Heat sesame oil in a pan, add tofu and cook until golden.",
+            "Add vegetables and garlic, stir-fry 5 minutes.",
+            "Add soy sauce and toss until coated."
+        ]
+    },
+    {
+        "id": 7,
+        "title": "Classic Beef Lasagna",
+        "image": "images/recipes/img7.png",
+        "description": "Layers of pasta, beef, and cheese baked to perfection.",
+        "link": "recipes/classic-beef-lasagna.html",
+        "category": "Main Dish",
+        "prepTime": "1 hr 30 min",
+        "rate": 4.0,
+        "ingredients": [
+            "12 lasagna noodles",
+            "500g ground beef",
+            "2 cups tomato sauce",
+            "2 cups ricotta cheese",
+            "2 cups mozzarella cheese",
+            "1 onion, chopped",
+            "1 tsp oregano"
+        ],
+        "instructions": [
+            "Cook noodles until al dente.",
+            "Cook beef with onion and tomato sauce.",
+            "Layer noodles, beef mixture, ricotta, and mozzarella.",
+            "Bake at 180°C for 45 minutes."
+        ]
+    },
+    {
+        "id": 8,
+        "title": "Roasted Cauliflower Steaks",
+        "image": "images/recipes/img8.png",
+        "description": "Thick cauliflower slices roasted with spices.",
+        "link": "recipes/roasted-cauliflower-steaks.html",
+        "category": "Side Dish",
+        "prepTime": "40 min",
+        "rate": 4.9,
+        "ingredients": [
+            "1 head cauliflower, sliced into steaks",
+            "3 tbsp olive oil",
+            "1 tsp paprika",
+            "1 tsp garlic powder",
+            "Salt and pepper"
+        ],
+        "instructions": [
+            "Preheat oven to 200°C.",
+            "Brush cauliflower with oil and seasonings.",
+            "Roast 25–30 minutes until golden brown."
+        ]
+    },
+    {
+        "id": 9,
+        "title": "Spicy Garlic Shrimp Pasta",
+        "image": "images/recipes/img9.png",
+        "description": "Pasta tossed with shrimp, garlic, and a spicy kick.",
+        "link": "recipes/spicy-garlic-shrimp-pasta.html",
+        "category": "Pasta",
+        "prepTime": "25 min",
+        "chef": true,
+        "rate": 2.4,
+        "ingredients": [
+            "200g pasta",
+            "150g shrimp, peeled",
+            "3 garlic cloves, sliced",
+            "2 tbsp olive oil",
+            "1 tsp chili flakes",
+            "Salt and pepper"
+        ],
+        "instructions": [
+            "Cook pasta until al dente.",
+            "Sauté garlic and chili flakes in olive oil.",
+            "Add shrimp and cook until pink.",
+            "Toss pasta with shrimp mixture and serve."
+        ]
+    },
+    {
+        "id": 20,
+        "title": "Savory Chicken Stir-Fry with Broccoli",
+        "image": "images/recipes/img10.png",
+        "description": "Tender chicken strips stir-fried with broccoli in a savory soy-garlic sauce.",
+        "link": "recipes/chicken-stir-fry-broccoli.html",
+        "category": "Main Dish",
+        "prepTime": "25 min",
+        "chef": true,
+        "rate": 4.5,
+        "ingredients": [
+            "300g chicken breast, sliced",
+            "1 head broccoli, florets",
+            "2 tbsp soy sauce",
+            "1 tbsp oyster sauce",
+            "2 garlic cloves, minced",
+            "1 tbsp vegetable oil"
+        ],
+        "instructions": [
+            "Heat oil in a pan, cook chicken until browned.",
+            "Add broccoli and garlic, stir-fry 3 minutes.",
+            "Stir in soy sauce and oyster sauce, cook 2 minutes more."
+        ]
+    },
+    {
+        "id": 21,
+        "title": "Quick & Healthy Vegan Tacos",
+        "image": "images/recipes/img11.png",
+        "description": "Flavorful vegan tacos loaded with beans, avocado, and fresh vegetables.",
+        "link": "recipes/vegan-tacos.html",
+        "category": "Vegan",
+        "prepTime": "20 min",
+        "trending": true,
+        "rate": 2.7,
+        "ingredients": [
+            "6 corn tortillas",
+            "1 cup black beans",
+            "1 avocado, sliced",
+            "1 cup lettuce, shredded",
+            "1 tomato, diced",
+            "Hot sauce"
+        ],
+        "instructions": [
+            "Warm tortillas in a skillet.",
+            "Fill with beans, avocado, lettuce, and tomato.",
+            "Top with hot sauce and serve."
+        ]
+    },
+    {
+        "id": 22,
+        "title": "Classic Hearty Lentil Soup",
+        "image": "images/recipes/img12.png",
+        "description": "Comforting soup made with lentils, carrots, celery, and herbs.",
+        "link": "recipes/lentil-soup.html",
+        "category": "Soup",
+        "prepTime": "40 min",
+        "chef": true,
+        "rate": 1.2,
+        "ingredients": [
+            "1 cup green lentils",
+            "2 carrots, chopped",
+            "2 celery sticks, chopped",
+            "1 onion, chopped",
+            "4 cups vegetable broth",
+            "1 tsp thyme",
+            "Salt and pepper"
+        ],
+        "instructions": [
+            "Sauté onion, carrots, and celery.",
+            "Add lentils, broth, and thyme.",
+            "Simmer 30 minutes until lentils are tender.",
+            "Season and serve."
+        ]
+    },
+    {
+        "id": 23,
+        "title": "Baked Salmon with Roasted Asparagus",
+        "image": "images/recipes/img13.png",
+        "description": "Oven-baked salmon fillet served with roasted asparagus and lemon.",
+        "link": "recipes/baked-salmon-asparagus.html",
+        "category": "Seafood",
+        "prepTime": "35 min",
+        "trending": true,
+        "rate": 4.8,
+        "ingredients": [
+            "2 salmon fillets",
+            "1 bunch asparagus",
+            "2 tbsp olive oil",
+            "1 lemon, sliced",
+            "Salt and pepper"
+        ],
+        "instructions": [
+            "Preheat oven to 200°C.",
+            "Place salmon and asparagus on a baking tray.",
+            "Drizzle with oil, season, and top with lemon slices.",
+            "Bake 20 minutes until salmon flakes easily."
+        ]
+    },
+    {
+        "id": 24,
+        "title": "Fresh Caprese Salad",
+        "image": "images/recipes/img14.png",
+        "description": "Refreshing salad with ripe tomatoes, mozzarella, basil, and olive oil.",
+        "link": "recipes/caprese-salad.html",
+        "category": "Salad",
+        "prepTime": "15 min",
+        "rate": 3.7,
+        "ingredients": [
+            "2 tomatoes, sliced",
+            "200g mozzarella, sliced",
+            "Fresh basil leaves",
+            "2 tbsp olive oil",
+            "1 tbsp balsamic glaze"
+        ],
+        "instructions": [
+            "Arrange tomato and mozzarella slices alternately.",
+            "Sprinkle with basil leaves.",
+            "Drizzle with olive oil and balsamic glaze."
+        ]
+    },
+    {
+        "id": 25,
+        "title": "Spicy Garlic Shrimp Pasta",
+        "image": "images/recipes/img15.jpg",
+        "description": "Pasta tossed with shrimp, garlic, and a spicy kick.",
+        "link": "recipes/spicy-garlic-shrimp-pasta.html",
+        "category": "Pasta",
+        "prepTime": "25 min",
+        "chef": true,
+        "rate": 1.6,
+        "ingredients": [
+            "200g pasta",
+            "150g shrimp",
+            "3 garlic cloves, minced",
+            "1 tsp chili flakes",
+            "2 tbsp olive oil",
+            "Salt and pepper"
+        ],
+        "instructions": [
+            "Cook pasta until al dente.",
+            "Sauté garlic and chili flakes in olive oil.",
+            "Add shrimp, cook until pink.",
+            "Toss with pasta and serve."
+        ]
+    }
+]
