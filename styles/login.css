@@ -1,16 +1,13 @@
-.landing {
+body {
     background-image: url("../images/login.png");
     background-repeat: no-repeat;
-    background-attachment: fixed;
     background-size: cover;
-    overflow: hidden;
 }
 
 .landing {
-    min-height: calc(100vh - 40.8px);
+    height: calc(100vh - 40.8px);
 }
 
-/* Checkbox Styling */
 .form-check-input {
     accent-color: var(--primary-color);
 }
@@ -25,19 +22,8 @@
     box-shadow: 0 0 0 0.2rem rgba(55, 31, 31, 0.25);
 }
 
-.landing .filter {
-    height: 100%;
-    width: 100%;
-    background-color: #2f303020;
-    top: 0;
-    left: 0;
-}
-
 .landing h1 {
     font-family: "Lora", serif;
-    font-size: 60px; 
-    line-height: 75px; 
-    font-weight: 800; 
     color: #F3F4F6FF;
     text-shadow: var(--primary-color) 1px 1px;
 }
@@ -71,7 +57,6 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Tab Styling */
 .nav-tabs {
     border-bottom: 2px solid #e9ecef;
 }
@@ -103,7 +88,6 @@
     font-size: 0.9rem;
 }
 
-/* Form Styling */
 .login-form .form-label,
 .signup-form .form-label {
     color: var(--primary-color);
@@ -166,7 +150,6 @@
     border-radius: 8px;
 }
 
-/* Tab Content Animation */
 .tab-pane {
     transition: all 0.3s ease;
 }
@@ -179,49 +162,10 @@
     opacity: 1;
 }
 
-@media (max-width: 768px) {
-    .login-container {
-        max-width: 400px;
-    }
-    
-    .login-container h1 {
-        font-size: 2.5rem;
-    }
-    
-    .login-container p {
-        font-size: 1rem;
-    }
-    
-    .login-card {
-        padding: 1.5rem;
-    }
-    
-    .nav-tabs .nav-link {
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
-    }
+footer {
+    border-top: rgba(255, 255, 255, 0.5) solid 1px;
 }
 
-@media (max-width: 480px) {
-    .login-container {
-        padding: 0 15px;
-        max-width: 350px;
-    }
-    
-    .login-container h1 {
-        font-size: 2rem;
-    }
-    
-    .login-card {
-        padding: 1rem;
-    }
-    
-    .nav-tabs .nav-link {
-        padding: 0.5rem 0.75rem;
-        font-size: 0.85rem;
-    }
-    
-    .nav-tabs .nav-link i {
-        display: none;
-    }
+footer a:hover {
+    opacity: 0.9;
 }

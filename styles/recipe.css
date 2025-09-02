@@ -38,6 +38,12 @@ h1, h4 {
 	margin-right: 10px;
 }
 
+.star-system i {
+    padding-top: 0.37rem;
+    color: var(--brown-color);
+    font-size: 0.8rem;
+}
+
 .recipe-actions .btn {
 	min-width: 160px;
 }

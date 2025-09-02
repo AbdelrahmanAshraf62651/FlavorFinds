@@ -18,11 +18,11 @@
 .card .card-body .card-title {
     max-height: 192px;
     font-family: "Lora", serif;
-    line-height: 28px; 
+    line-height: 28px;
     font-weight: 600;
 }
 
-.card .card-body .star-system i {
+.star-system i {
     padding-top: 0.37rem;
     color: var(--brown-color);
     font-size: 0.8rem;
@@ -30,8 +30,8 @@
 
 .card-footer {
     border-top: 1px solid rgba(0, 0, 0, 0.3);
-    padding: 1rem!important;
-    background-color: inherit!important;
+    padding: 1rem !important;
+    background-color: inherit !important;
 }
 
 .card .clock i {
@@ -40,12 +40,30 @@
 
 .card .card-footer .btn {
     max-width: 120px;
-    background-color: var(--primary-color)!important;
-    border: none!important;
+    background-color: var(--primary-color) !important;
+    border: none !important;
     font-weight: 500;
     transition: all ease-in-out 0.2s;
 }
 
 .card .card-footer .btn:hover {
     opacity: 0.9;
+}
+
+.search-filter button {
+    transition: all 0.3s ease;
+}
+
+.search-filter button:hover {
+    transform: translateY(-1px);
+}
+
+.search-filter .primary-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.search-filter .grey-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
 }
