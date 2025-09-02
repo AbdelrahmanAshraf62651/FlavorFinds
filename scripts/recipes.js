@@ -1,7 +1,7 @@
 let allRecipes = document.querySelector(".recipes");
 let currentRecipes = [];
 
-fetch("../db/recipes.json")
+fetch("./db/recipes.json")
     .then(res => res.json())
     .then(recipes => {
         currentRecipes = recipes;
