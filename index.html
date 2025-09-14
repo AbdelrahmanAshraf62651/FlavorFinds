@@ -26,7 +26,7 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li class="nav-item mx-auto">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
                     </li>
                     <li class="nav-item mx-auto">
                         <a class="nav-link" href="./recipes.html">Recipes</a>
@@ -38,13 +38,13 @@
                         <a class="nav-link" href="./about.html">About Us</a>
                     </li>
                 </ul>
-                <div class="navbar-text d-flex justify-content-between d-lg-block">
-                    <a href="./login.html" class="btn grey-btn fw-semibold">Login/Sign Up</a>
-                    <img src="images/profile.jpg" class="img-fluid ms-3" loading="lazy">
+                <div class="login-btn d-flex justify-content-between d-lg-block">
+                    <a href="./login.html" class="btn btn-outline-secondary">Login/Sign Up</a>
                 </div>
             </div>
         </div>
     </nav>
+
     <div class="page">
         <div class="landing position-relative text-center d-flex justify-content-center align-items-center flex-column">
             <div class="filter position-absolute"></div>
@@ -73,27 +73,24 @@
 
             </div>
             <div class="chef-items row pt-4 trending g-4"></div>
-
-            <footer class="d-flex justify-content-between mt-5 pt-4 pb-4">
-                <div class="copyright text-black-50">
-                    &copy; 2025 FlavorFinds. All rights reserved.
-                </div>
-                <div class="icons d-flex align-items-center">
-                    <a href=""><i class="fa-brands fa-facebook-f mx-2 fa-lg"></i></a>
-                    <a href=""><i class="fa-brands fa-twitter mx-2 fa-lg"></i></a>
-                    <a href=""><i class="fa-brands fa-linkedin ms-2 fa-lg"></i></a>
-                </div>
-            </footer>
         </div>
     </div>
 
+    <footer class="container d-flex justify-content-between mt-5 pt-4 pb-4 flex-column flex-sm-row text-center text-sm-start">
+        <div class="copyright text-black-50 mb-2 mb-sm-0">
+            &copy; 2025 FlavorFinds. All rights reserved.
+        </div>
+        <div class="icons d-flex align-items-center justify-content-center">
+            <a href=""><i class="fa-brands fa-facebook-f mx-2 fa-lg"></i></a>
+            <a href=""><i class="fa-brands fa-twitter mx-2 fa-lg"></i></a>
+            <a href=""><i class="fa-brands fa-linkedin ms-2 fa-lg"></i></a>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
         crossorigin="anonymous"></script>
     <script src="scripts/home.js"></script>
-    <script src="scripts/home.js"></script>
-    <script src="scripts/recipe.js"></script>
 </body>
 
 </html>

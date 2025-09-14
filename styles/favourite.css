@@ -17,6 +17,18 @@
     font-size: 0.8rem;
 }
 
+.card .card-footer .btn-primary {
+    background-color: var(--primary-color)!important;
+    border: none!important;
+    border-radius: 0px 0px 6px 6px;
+    font-weight: 500;
+    transition: all ease-in-out 0.2s;
+}
+
+.card .card-footer button:hover {
+    opacity: 0.9;
+}
+
 .card-footer {
     border-top: 1px solid rgba(0, 0, 0, 0.3);
     padding: 1rem!important;

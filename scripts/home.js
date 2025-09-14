@@ -73,10 +73,8 @@ function createCard(item) {
           </div>
         </div>
         <div class="card-footer p-0">
-            <button class="view-recipe-btn card-img-bottom rounded btn btn-primary" data-recipe='${JSON.stringify(
-            item
-        )}'>View Recipe</button>
-          </div>
+            <button class="view-recipe-btn card-img-bottom rounded btn btn-primary" data-recipe='${JSON.stringify(item)}'>View Recipe</button>
+        </div>
       </div>
     </div>
   `;
@@ -86,7 +84,7 @@ function setupRecipeButtons() {
     document.querySelectorAll('.view-recipe-btn').forEach((btn) => {
         btn.addEventListener('click', function () {
             const recipe = JSON.parse(this.dataset.recipe);
-            addRecipe(recipe);
+            window.location.href = `/FlavorFinds/recipe-viewer.html?id=${recipe.id}`;
         });
     });
 }
