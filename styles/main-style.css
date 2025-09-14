@@ -4,10 +4,15 @@
     --primary-color: #371f1f;
     --black-color: #19191FFF;
     --brown-color: #DAB88BFF;
+    --gray-color: #323742FF;
 }
 
 * {
     font-family: "Inter", sans-serif;
+}
+
+.page {
+    min-height: calc(100vh - 177px);
 }
 
 .primary-btn {
@@ -40,6 +45,10 @@
 
 nav {
     box-shadow:0px 0px 1px #171A1F;
+}
+
+nav .login-btn a  {
+    font-size: small;
 }
 
 .navbar-nav .nav-item a:hover {

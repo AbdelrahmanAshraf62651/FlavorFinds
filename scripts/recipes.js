@@ -55,7 +55,7 @@ function setupRecipeButtons() {
     document.querySelectorAll('.view-recipe-btn').forEach(btn => {
         btn.addEventListener('click', function () {
             const recipe = JSON.parse(this.dataset.recipe);
-            addRecipe(recipe);
+            window.location.href = `/FlavorFinds/recipe-viewer.html?id=${recipe.id}`;
         });
     });
 }
@@ -63,11 +63,9 @@ function setupRecipeButtons() {
 function setupFilterButtons() {
     document.querySelectorAll('.search-filter button').forEach(btn => {
         btn.addEventListener('click', function () {
-            // Remove active class from all buttons
             document.querySelectorAll('.search-filter button').forEach(b =>
                 b.classList.remove('primary-btn', 'grey-btn'));
 
-            // Add active class to clicked button
             this.classList.add('primary-btn');
             this.classList.remove('grey-btn');
 
