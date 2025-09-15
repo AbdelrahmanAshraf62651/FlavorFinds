@@ -64,7 +64,7 @@ function renderStars(rate) {
 
 function createCard(item) {
     return `
-    <div class="col-12 col-sm-6 col-lg-3">
+    <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
       <div class="card h-100 overflow-hidden">
         <div class="card-top position-relative">
           <div class="position-absolute btn btn-light rounded-pill">${item.category}</div>
