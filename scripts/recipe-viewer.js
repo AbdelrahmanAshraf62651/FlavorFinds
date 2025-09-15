@@ -47,8 +47,8 @@ function addPrevNext(recipes, idx) {
     const prev = recipes[idx - 1];
     const next = recipes[idx + 1];
     nav.innerHTML = `
-        <div>${prev ? `<a class="btn btn-outline-secondary" href="recipe-viewer.html?id=${prev.id}"><i class="fa-solid fa-arrow-left me-1"></i>${prev.title}</a>` : ''}</div>
-        <div>${next ? `<a class="btn btn-outline-secondary" href="recipe-viewer.html?id=${next.id}">${next.title}<i class="fa-solid fa-arrow-right ms-1"></i></a>` : ''}</div>
+        <div>${prev ? `<a class="btn btn-outline-secondary" href="recipe-viewer.html?id=${prev.id}"><i class="fa-solid fa-arrow-left me-1"></i>Previous</a>` : ''}</div>
+        <div>${next ? `<a class="btn btn-outline-secondary" href="recipe-viewer.html?id=${next.id}">Next<i class="fa-solid fa-arrow-right ms-1"></i></a>` : ''}</div>
     `;
     container.appendChild(nav);
 }
@@ -91,7 +91,7 @@ function displayRecipe(recipe) {
             ? recipe.ingredients.map((ing) => `<li class="list-group-item">${ing}</li>`).join("")
             : `<li class="list-group-item">No ingredients listed</li>`}
         </ul>
-        <div class="recipe-actions d-flex gap-2">
+        <div class="recipe-actions d-flex gap-2 flex-column-reverse flex-sm-row">
           <button onclick="goBack()" class="btn btn-outline-secondary">Back</button>
           <button class="btn primary-btn" id="add-to-favorite-btn">Add to Favorite</button>
           <button class="btn btn-outline-danger d-none" id="remove-favorite-btn">Remove Favorite</button>
