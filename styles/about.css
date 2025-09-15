@@ -35,10 +35,6 @@
     background-color: rgba(255, 255, 255, 0)!important;
     border: #F3F4F6FF 1px solid!important;
     border-radius: 0px;
-    color: #2f303000!important;
-}
-
-.landing .container .grey-btn:hover {
     color: #F3F4F6FF!important;
 }
 
@@ -50,7 +46,7 @@
 
 .card {
     transition: all 0.2s ease;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.373);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.086);
 }
 
 .card .card-body i {
