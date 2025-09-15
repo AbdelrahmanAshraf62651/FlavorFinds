@@ -4,7 +4,7 @@ function renderStars(rate) {
     let stars = "";
     for (let i = 1; i <= 5; i++) {
         if (rate >= i) stars += `<i class="fa-solid fa-star"></i>`;
-        else if (rate >= i - 0.5) stars += `<i class="fa-solid fa-star-half-alt"></i>`;
+        else if (rate >= i - 0.5) stars += `<i class="fa-solid fa-star-half-stroke"></i>`;
         else stars += `<i class="fa-regular fa-star"></i>`;
     }
     return stars;
@@ -18,8 +18,14 @@ function loadRecipe() {
         fetch("./db/recipes.json")
             .then((res) => res.json())
             .then((recipes) => {
-                const recipe = recipes.find((r) => r.id == recipeId);
-                recipe ? displayRecipe(recipe) : showError("Recipe not found");
+                const idx = recipes.findIndex((r) => r.id == recipeId);
+                const recipe = recipes[idx];
+                if (recipe) {
+                    displayRecipe(recipe);
+                    addPrevNext(recipes, idx);
+                } else {
+                    showError("Recipe not found");
+                }
             })
             .catch(() => showError("Error loading recipe"));
     } else {
@@ -32,6 +38,19 @@ function loadRecipe() {
             showError("No recipe data available");
         }
     }
+}
+
+function addPrevNext(recipes, idx) {
+    const container = document.getElementById("recipe-container");
+    const nav = document.createElement('div');
+    nav.className = 'd-flex justify-content-between align-items-center mt-4';
+    const prev = recipes[idx - 1];
+    const next = recipes[idx + 1];
+    nav.innerHTML = `
+        <div>${prev ? `<a class="btn btn-outline-secondary" href="recipe-viewer.html?id=${prev.id}"><i class="fa-solid fa-arrow-left me-1"></i>${prev.title}</a>` : ''}</div>
+        <div>${next ? `<a class="btn btn-outline-secondary" href="recipe-viewer.html?id=${next.id}">${next.title}<i class="fa-solid fa-arrow-right ms-1"></i></a>` : ''}</div>
+    `;
+    container.appendChild(nav);
 }
 
 function displayRecipe(recipe) {
@@ -75,12 +94,52 @@ function displayRecipe(recipe) {
         <div class="recipe-actions d-flex gap-2">
           <button onclick="goBack()" class="btn btn-outline-secondary">Back</button>
           <button class="btn primary-btn" id="add-to-favorite-btn">Add to Favorite</button>
+          <button class="btn btn-outline-danger d-none" id="remove-favorite-btn">Remove Favorite</button>
         </div>
       </aside>
     </div>
   `;
 
-    document.getElementById("add-to-favorite-btn").onclick = () => handleFavClick(recipe);
+    const addBtn = document.getElementById("add-to-favorite-btn");
+    const removeBtn = document.getElementById("remove-favorite-btn");
+
+    function updateFavButtons() {
+        const favs = JSON.parse(localStorage.getItem("favItems") || "[]");
+        const exists = favs.find(f => String(f.id) === String(recipe.id));
+
+        if (exists) {
+            addBtn.classList.add('d-none');
+            removeBtn.classList.remove('d-none');
+        } else {
+            addBtn.classList.remove('d-none');
+            removeBtn.classList.add('d-none');
+        }
+    }
+
+    updateFavButtons();
+
+    addBtn.onclick = () => {
+        let favs = JSON.parse(localStorage.getItem("favItems") || "[]");
+        const exists = favs.find(f => String(f.id) === String(recipe.id));
+        if (!exists) {
+            favs.push(recipe);
+            localStorage.setItem("favItems", JSON.stringify(favs));
+            showModal("Recipe saved successfully!", "success");
+            if (window.updateFavBadge) window.updateFavBadge();
+            updateFavButtons();
+        } else {
+            showModal("Already in favorites", "danger");
+        }
+    };
+
+    removeBtn.onclick = () => {
+        let favs = JSON.parse(localStorage.getItem("favItems") || "[]");
+        favs = favs.filter(f => String(f.id) !== String(recipe.id));
+        localStorage.setItem("favItems", JSON.stringify(favs));
+        showModal("Removed from favorites", "fail");
+        if (window.updateFavBadge) window.updateFavBadge();
+        updateFavButtons();
+    };
 }
 
 function showModal(message, type = "success") {
@@ -89,28 +148,10 @@ function showModal(message, type = "success") {
 
     msg.textContent = message;
 
-    if (type === "success") {
-        btn.style.backgroundColor = "green";
-    } else {
-        btn.style.backgroundColor = "red";
-    }
+    btn.style.backgroundColor = type === "success" ? "#371f1f" : "red";
 
     const modal = new bootstrap.Modal(document.getElementById("popupModal"));
     modal.show();
-}
-
-function handleFavClick(item) {
-    let favs = JSON.parse(localStorage.getItem("favItems") || "[]");
-    const exists = favs.find(fav => fav.title === item.title);
-
-    if (exists) {
-        showModal("Already in favorites", "danger");
-        return;
-    }
-
-    favs.push(item);
-    localStorage.setItem("favItems", JSON.stringify(favs));
-    showModal("Recipe saved successfully!", "success");
 }
 
 function showError(message) {
