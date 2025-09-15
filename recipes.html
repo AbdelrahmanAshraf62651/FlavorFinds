@@ -16,25 +16,25 @@
 </head>
 
 <body>
-    <nav class="navbar bg-white navbar-expand-lg sticky-top ps-3 pe-3">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top ps-3 pe-3 shadow-sm">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">FlavorFinds</a>
+            <a class="navbar-brand" href="./index.html">FlavorFinds</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                 aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                    <li class="nav-item mx-auto">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 text-center">
+                    <li class="nav-item">
                         <a class="nav-link" href="./index.html">Home</a>
                     </li>
-                    <li class="nav-item active mx-auto">
+                    <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="./recipes.html">Recipes</a>
                     </li>
-                    <li class="nav-item mx-auto">
+                    <li class="nav-item">
                         <a class="nav-link" href="./favourite.html">Favorites</a>
                     </li>
-                    <li class="nav-item mx-auto">
+                    <li class="nav-item">
                         <a class="nav-link" href="./about.html">About Us</a>
                     </li>
                 </ul>
@@ -45,39 +45,73 @@
         </div>
     </nav>
 
-    <div class="container page mt-5">
-        <div class="title d-flex flex-column flex-md-row align-items-start align-items-md-center">
+    <div class="container page mt-5" id="main">
+        <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center mb-3">
             <h2 class="mb-2 mb-md-0 me-md-auto">All Recipes</h2>
-            <div class="search-filter w-100">
-                <div class="d-flex flex-wrap align-items-center justify-content-start justify-content-md-end gap-2">
-                    <span class="text-black-50 me-2">Sort by:</span>
-                    <div class="d-flex flex-wrap">
-                        <button type="button" class="btn grey-btn me-2">Popular</button>
-                        <button type="button" class="btn grey-btn me-2">Alphabetical</button>
-                        <button type="button" class="btn grey-btn">Quickest Prep</button>
+            <div class="search-filter w-100 py-3">
+                <div class="container">
+                    <div class="row g-3 align-items-center">
+                        <div class="col-12 col-md-5">
+                            <input id="recipesSearch" type="text"
+                                class="form-control form-control-lg rounded-pill shadow-sm"
+                                placeholder="Search recipes...">
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="dropdown w-100">
+                                <button class="btn primary-btn dropdown-toggle w-100" type="button"
+                                    id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Filter: All
+                                </button>
+                                <ul class="dropdown-menu w-100" aria-labelledby="categoryDropdown" id="categoryMenu">
+                                    <li><a class="dropdown-item" href="#" data-cat="all">All</a></li>
+                                    <li><a class="dropdown-item" href="#" data-cat="Main Dish">Main Dish</a></li>
+                                    <li><a class="dropdown-item" href="#" data-cat="Dessert">Dessert</a></li>
+                                    <li><a class="dropdown-item" href="#" data-cat="Seafood">Seafood</a></li>
+                                    <li><a class="dropdown-item" href="#" data-cat="Soup">Soup</a></li>
+                                    <li><a class="dropdown-item" href="#" data-cat="Vegan">Vegan</a></li>
+                                    <li><a class="dropdown-item" href="#" data-cat="Side Dish">Side Dish</a></li>
+                                    <li><a class="dropdown-item" href="#" data-cat="Pasta">Pasta</a></li>
+                                    <li><a class="dropdown-item" href="#" data-cat="Salad">Salad</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="dropdown w-100">
+                                <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button"
+                                    id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Sort: Popular
+                                </button>
+                                <ul class="dropdown-menu w-100" aria-labelledby="sortDropdown" id="sortMenu">
+                                    <li><a class="dropdown-item" href="#" data-sort="popular">Popular</a></li>
+                                    <li><a class="dropdown-item" href="#" data-sort="alphabetical">Alphabetical</a></li>
+                                    <li><a class="dropdown-item" href="#" data-sort="quickest">Quickest Prep</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="recipes row pt-4 trending g-4"></div>
+        <div class="recipes row pt-4 g-4"></div>
+        <div class="d-flex justify-content-center my-4">
+            <button id="loadMoreBtn" class="btn btn-outline-secondary d-none">Load More</button>
+        </div>
     </div>
 
-    <footer
-        class="container d-flex justify-content-between mt-5 pt-4 pb-4 flex-column flex-sm-row text-center text-sm-start">
+    <footer class="container d-flex justify-content-between mt-5 pt-4 pb-4 flex-column flex-sm-row text-center text-sm-start">
         <div class="copyright text-black-50 mb-2 mb-sm-0">
             &copy; 2025 FlavorFinds. All rights reserved.
         </div>
         <div class="icons d-flex align-items-center justify-content-center">
-            <a href=""><i class="fa-brands fa-facebook-f mx-2 fa-lg"></i></a>
-            <a href=""><i class="fa-brands fa-twitter mx-2 fa-lg"></i></a>
-            <a href=""><i class="fa-brands fa-linkedin ms-2 fa-lg"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook-f mx-2 fa-lg"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter mx-2 fa-lg"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin ms-2 fa-lg"></i></a>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
         crossorigin="anonymous"></script>
-    <script src="scripts/recipe.js"></script>
     <script src="scripts/recipes.js"></script>
 </body>
 
