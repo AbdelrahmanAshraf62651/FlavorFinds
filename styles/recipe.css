@@ -8,8 +8,9 @@ h1, h4 {
 
 .recipe-hero img {
 	width: 100%;
-	height: auto;
+	max-height: 30rem;
 	border-radius: 8px;
+	object-fit: cover;
 }
 
 .meta-badges .badge {

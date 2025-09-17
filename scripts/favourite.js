@@ -11,8 +11,24 @@ function renderStars(rate) {
     return stars;
 }
 
+function renderFavoritesSkeleton(container, count = 4) {
+    container.innerHTML = "";
+    for (let i = 0; i < count; i++) {
+        const skeleton = document.createElement("div");
+        skeleton.className = "col-12 col-sm-6 col-lg-4 col-xl-3 mb-4";
+        skeleton.innerHTML = `
+            <div class="card h-100 placeholder-glow">
+                <div class="w-100 h-100 bg-secondary placeholder" style="min-height: 450px;"></div>
+            </div>
+        `;
+        container.appendChild(skeleton);
+    }
+}
+
 function loadFavorites() {
     const container = document.getElementById("favoritesContainer");
+    renderFavoritesSkeleton(container, 4);
+
     let favs = JSON.parse(localStorage.getItem("favItems") || "[]");
     container.innerHTML = "";
 
@@ -24,38 +40,34 @@ function loadFavorites() {
 
     favs.forEach((recipe, index) => {
         const card = document.createElement("div");
-        card.className = "col-12 col-sm-6 col-lg-4 col-xl-3";
+        card.className = "col-12 col-sm-6 col-lg-4 col-xl-3 mb-3";
         card.innerHTML = `
-          <div class="card h-100 overflow-hidden">
+            <div class="card h-100 overflow-hidden">
             <div class="card-top position-relative">
-              <img src="${recipe.image}" class="img-fluid w-100" loading="lazy" alt="${recipe.title}">
+                <img src="${recipe.strMealThumb}" class="img-fluid w-100" loading="lazy" alt="${recipe.strMeal}">
             </div>
             <div class="card-body d-flex flex-column">
-              <h5 class="card-title">${recipe.title}</h5>
-              <p class="card-text text-black-50">${recipe.description}</p>
-              <div class="star-system d-flex flex-row g-1 mt-auto">
-                ${renderStars(recipe.rate)}
-                <div class="rate ps-2 text-black-50">(${recipe.rate})</div>
-              </div>
+                <h5 class="card-title">${recipe.strMeal}</h5>
+                <p class="card-text text-black-50">${recipe.strInstructions ? recipe.strInstructions.slice(0, 100) + "..." : "Delicious recipe from TheMealDB"}</p>
             </div>
             <div class="card-footer p-0 d-flex flex-column align-items-center justify-content-between">
-              <button class="view-recipe-btn card-img-bottom rounded btn btn-primary mb-2" data-id="${recipe.id}">View Recipe</button>
-              <button class="card-img-bottom rounded btn btn-outline-secondary" onclick="removeFavorite(${index})">
+                <button class="view-recipe-btn card-img-bottom rounded btn btn-primary mb-2" data-id="${recipe.idMeal}">View Recipe</button>
+                <button class="card-img-bottom rounded btn btn-outline-secondary" onclick="removeFavorite(${index})">
                 Remove from Favorites
-              </button>
+                </button>
             </div>
-          </div>
-        `;
+            </div>`;
         container.appendChild(card);
     });
 
     setupRecipeButtons();
     if (window.updateFavBadge) window.updateFavBadge();
+
 }
 
 function setupRecipeButtons() {
-    document.querySelectorAll('.view-recipe-btn').forEach((btn) => {
-        btn.addEventListener('click', function () {
+    document.querySelectorAll(".view-recipe-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
             const id = this.dataset.id;
             window.location.href = `recipe-viewer.html?id=${id}`;
         });

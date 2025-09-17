@@ -1,6 +1,6 @@
 let currentRecipe = null;
 
-function renderStars(rate) {
+function renderStars(rate = 4) {
     let stars = "";
     for (let i = 1; i <= 5; i++) {
         if (rate >= i) stars += `<i class="fa-solid fa-star"></i>`;
@@ -10,85 +10,84 @@ function renderStars(rate) {
     return stars;
 }
 
-function loadRecipe() {
+async function loadRecipe() {
     const urlParams = new URLSearchParams(window.location.search);
     const recipeId = urlParams.get("id");
 
     if (recipeId) {
-        fetch("./db/recipes.json")
-            .then((res) => res.json())
-            .then((recipes) => {
-                const idx = recipes.findIndex((r) => r.id == recipeId);
-                const recipe = recipes[idx];
-                if (recipe) {
-                    displayRecipe(recipe);
-                    addPrevNext(recipes, idx);
-                } else {
-                    showError("Recipe not found");
-                }
-            })
-            .catch(() => showError("Error loading recipe"));
-    } else {
-        const storedRecipe = localStorage.getItem("currentRecipe");
-        if (storedRecipe) {
-            const recipe = JSON.parse(storedRecipe);
-            displayRecipe(recipe);
-            localStorage.removeItem("currentRecipe");
-        } else {
-            showError("No recipe data available");
+        try {
+            const recipe = await getRecipeInfo(recipeId);
+            if (recipe) {
+                displayRecipe(recipe);
+            } else {
+                showError("Recipe not found");
+            }
+        } catch {
+            showError("Error loading recipe");
         }
+    } else {
+        showError("No recipe ID provided");
     }
 }
 
-function addPrevNext(recipes, idx) {
-    const container = document.getElementById("recipe-container");
-    const nav = document.createElement('div');
-    nav.className = 'd-flex justify-content-between align-items-center mt-4';
-    const prev = recipes[idx - 1];
-    const next = recipes[idx + 1];
-    nav.innerHTML = `
-        <div>${prev ? `<a class="btn btn-outline-secondary" href="recipe-viewer.html?id=${prev.id}"><i class="fa-solid fa-arrow-left me-1"></i>Previous</a>` : ''}</div>
-        <div>${next ? `<a class="btn btn-outline-secondary" href="recipe-viewer.html?id=${next.id}">Next<i class="fa-solid fa-arrow-right ms-1"></i></a>` : ''}</div>
-    `;
-    container.appendChild(nav);
+function extractIngredients(recipe) {
+    const ingredients = [];
+    for (let i = 1; i <= 20; i++) {
+        const ingredient = recipe[`strIngredient${i}`];
+        const measure = recipe[`strMeasure${i}`];
+        if (ingredient && ingredient.trim()) {
+            ingredients.push(`${measure || ""} ${ingredient}`.trim());
+        }
+    }
+    return ingredients;
 }
 
 function displayRecipe(recipe) {
     currentRecipe = recipe;
-    document.title = `${recipe.title} - FlavorFinds`;
+    document.title = `${recipe.strMeal} - FlavorFinds`;
 
+    const ingredients = extractIngredients(recipe);
     const container = document.getElementById("recipe-container");
 
     container.innerHTML = `
     <header class="recipe-header mb-4 pb-3">
-      <h1 class="fw-bold">${recipe.title}</h1>
-      <div class="d-flex align-items-center text-black-50">
-        <div class="me-3"><i class="fa-regular fa-clock me-1" style="color: var(--primary-color)"></i> ${recipe.prepTime}</div>
-        <div class="star-system">${renderStars(recipe.rate)} (${recipe.rate})</div>
-      </div>
+      <h1 class="fw-bold">${recipe.strMeal}</h1>
     </header>
 
     <div class="row g-4">
       <section class="col-12 col-lg-7">
         <div class="recipe-hero mb-3">
-          <img src="${recipe.image}" alt="${recipe.title}">
+          <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}">
         </div>
         <h4 class="mt-4 mb-3">Instructions</h4>
         <ol class="list-unstyled">
-          ${recipe.instructions?.length
-            ? recipe.instructions.map((s, i) => `<li class="mb-3"><span class="step-number">${i + 1}</span> ${s}</li>`).join("")
+          ${recipe.strInstructions
+            ? recipe.strInstructions
+                .split(/[\r\n]+/)
+                .filter((s) => s.trim())
+                .map((s, i) => `<li class="mb-3"><span class="step-number">${i + 1}</span> ${s}</li>`)
+                .join("")
             : `<li>No instructions available</li>`}
         </ol>
+        ${recipe.strYoutube ? `
+        <div class="mt-4">
+          <h4 class="mb-3">Video Tutorial</h4>
+          <div class="ratio ratio-16x9">
+            <iframe src="https://www.youtube.com/embed/${recipe.strYoutube.split("v=")[1]}" 
+                    title="YouTube video" allowfullscreen></iframe>
+          </div>
+        </div>` : ""}
       </section>
 
       <aside class="col-12 col-lg-5">
         <div class="meta-badges mb-3">
-          <span class="badge rounded-pill">${recipe.category}</span>
+          <span class="badge rounded-pill">${recipe.strCategory || "Uncategorized"}</span>
+          <span class="badge rounded-pill">${recipe.strArea || "Unknown"}</span>
         </div>
         <h4 class="mb-3">Ingredients</h4>
         <ul class="list-group ingredients mb-4">
-          ${recipe.ingredients?.length
-            ? recipe.ingredients.map((ing) => `<li class="list-group-item">${ing}</li>`).join("")
+          ${ingredients.length
+            ? ingredients.map((ing) => `<li class="list-group-item">${ing}</li>`).join("")
             : `<li class="list-group-item">No ingredients listed</li>`}
         </ul>
         <div class="recipe-actions d-flex gap-2 flex-column-reverse flex-sm-row">
@@ -100,19 +99,22 @@ function displayRecipe(recipe) {
     </div>
   `;
 
+    setupFavoriteButtons(recipe);
+}
+
+function setupFavoriteButtons(recipe) {
     const addBtn = document.getElementById("add-to-favorite-btn");
     const removeBtn = document.getElementById("remove-favorite-btn");
 
     function updateFavButtons() {
         const favs = JSON.parse(localStorage.getItem("favItems") || "[]");
-        const exists = favs.find(f => String(f.id) === String(recipe.id));
-
+        const exists = favs.find((f) => String(f.idMeal) === String(recipe.idMeal));
         if (exists) {
-            addBtn.classList.add('d-none');
-            removeBtn.classList.remove('d-none');
+            addBtn.classList.add("d-none");
+            removeBtn.classList.remove("d-none");
         } else {
-            addBtn.classList.remove('d-none');
-            removeBtn.classList.add('d-none');
+            addBtn.classList.remove("d-none");
+            removeBtn.classList.add("d-none");
         }
     }
 
@@ -120,7 +122,7 @@ function displayRecipe(recipe) {
 
     addBtn.onclick = () => {
         let favs = JSON.parse(localStorage.getItem("favItems") || "[]");
-        const exists = favs.find(f => String(f.id) === String(recipe.id));
+        const exists = favs.find((f) => String(f.idMeal) === String(recipe.idMeal));
         if (!exists) {
             favs.push(recipe);
             localStorage.setItem("favItems", JSON.stringify(favs));
@@ -134,7 +136,7 @@ function displayRecipe(recipe) {
 
     removeBtn.onclick = () => {
         let favs = JSON.parse(localStorage.getItem("favItems") || "[]");
-        favs = favs.filter(f => String(f.id) !== String(recipe.id));
+        favs = favs.filter((f) => String(f.idMeal) !== String(recipe.idMeal));
         localStorage.setItem("favItems", JSON.stringify(favs));
         showModal("Removed from favorites", "fail");
         if (window.updateFavBadge) window.updateFavBadge();
@@ -145,11 +147,8 @@ function displayRecipe(recipe) {
 function showModal(message, type = "success") {
     const msg = document.getElementById("popupMessage");
     const btn = document.getElementById("popupBtn");
-
     msg.textContent = message;
-
     btn.style.backgroundColor = type === "success" ? "#371f1f" : "red";
-
     const modal = new bootstrap.Modal(document.getElementById("popupModal"));
     modal.show();
 }

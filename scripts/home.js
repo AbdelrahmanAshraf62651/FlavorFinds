@@ -1,96 +1,92 @@
-let trending = document.querySelector('.trending-items');
-let chef = document.querySelector('.chef-items');
-let searchInput = document.querySelector('.search-wrapper input');
-let allRecipes = [];
+const trending = document.querySelector(".trending-items");
+const chef = document.querySelector(".chef-items");
+const searchInput = document.querySelector(".search-wrapper input");
 
-fetch('./db/recipes.json')
-    .then((res) => res.json())
-    .then((recipes) => {
-        allRecipes = recipes;
-        displayFilteredRecipes(recipes);
-        setupRecipeButtons();
-    })
-    .catch(() => {
-        trending.innerHTML = chef.innerHTML = `
-            <div class="col-12 text-center py-5">
-                <i class="fa-solid fa-triangle-exclamation fa-2xl mb-3" style="color: var(--primary-color)"></i>
-                <h3>Failed to load recipes</h3>
-            </div>`;
-    });
+let trendingItems = [];
+let chefItems = [];
 
-searchInput.addEventListener('input', (e) => {
-    const searchTerm = e.target.value.toLowerCase();
-    const filteredRecipes = allRecipes.filter(recipe =>
-        recipe.title.toLowerCase().includes(searchTerm) ||
-        recipe.description.toLowerCase().includes(searchTerm) ||
-        recipe.category.toLowerCase().includes(searchTerm)
-    );
-    displayFilteredRecipes(filteredRecipes);
+function renderSkeletons(container, count) {
+    container.innerHTML = "";
+    for (let i = 0; i < count; i++) {
+        container.innerHTML += `
+        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+            <div class="card h-100 placeholder-glow">
+                <div class="placeholder w-100 h-100" style="height: 100%; min-height: 450px;"></div>
+            </div>
+        </div>`;
+    }
+}
+
+async function loadRecipesByIds(ids) {
+    const recipes = [];
+    for (let id of ids) {
+        try {
+            const recipe = await getRecipeInfo(id);
+            recipes.push(recipe);
+        } catch {
+            console.warn(`Failed to load recipe ID: ${id}`);
+        }
+    }
+    return recipes;
+}
+
+async function displayRecipes() {
+    renderSkeletons(trending, 4);
+    renderSkeletons(chef, 4);
+
+    const trendingRecipes = await loadRecipesByIds(trendingItems);
+    const chefRecipes = await loadRecipesByIds(chefItems);
+
+    trending.innerHTML = trendingRecipes.length
+        ? trendingRecipes.map(createCard).join("")
+        : getEmptyMessageHTML("No trending recipes");
+
+    chef.innerHTML = chefRecipes.length
+        ? chefRecipes.map(createCard).join("")
+        : getEmptyMessageHTML("No chef recipes");
+
     setupRecipeButtons();
-});
-
-function displayFilteredRecipes(recipes) {
-    const hasResults = recipes.some(recipe => recipe.trending || recipe.chef);
-
-    if (!hasResults) {
-        trending.innerHTML = chef.innerHTML = `
-            <div class="col-12 text-center py-5">
-                <i class="fa-solid fa-search fa-2xl mb-3" style="color: var(--primary-color)"></i>
-                <h3>No matching recipes</h3>
-                <p class="text-black-50">Try searching with different keywords</p>
-            </div>`;
-        return;
-    }
-
-    trending.innerHTML = '';
-    chef.innerHTML = '';
-
-    recipes.forEach((recipe) => {
-        if (recipe.trending) trending.innerHTML += createCard(recipe);
-        if (recipe.chef) chef.innerHTML += createCard(recipe);
-    });
 }
 
-function renderStars(rate) {
-    let stars = '';
-    for (let i = 1; i <= 5; i++) {
-        if (rate >= i) stars += `<i class="fa-solid fa-star"></i>`;
-        else if (rate >= i - 0.5)
-            stars += `<i class="fa-solid fa-star-half-stroke"></i>`;
-        else stars += `<i class="fa-regular fa-star"></i>`;
-    }
-    return stars;
+function init() {
+    trendingItems = ["52772", "52844", "52977", "52853"];
+    chefItems = ["52874", "52951", "52768", "52813"];
+    displayRecipes();
 }
 
-function createCard(item) {
+function createCard({ idMeal, strMeal, strMealThumb, strCategory, strArea }) {
     return `
     <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
       <div class="card h-100 overflow-hidden">
         <div class="card-top position-relative">
-          <div class="position-absolute btn btn-light rounded-pill">${item.category}</div>
-          <img src="${item.image}" class="img-fluid w-100" loading="lazy" alt="${item.title}">
+          <div class="position-absolute btn btn-light rounded-pill">${strCategory || "General"}</div>
+          <img src="${strMealThumb}" class="img-fluid w-100" loading="lazy" alt="${strMeal}">
         </div>
         <div class="card-body d-flex flex-column">
-          <h5 class="card-title">${item.title}</h5>
-          <p class="card-text text-black-50">${item.description}</p>
-          <div class="star-system d-flex flex-row g-1 mt-auto">
-            ${renderStars(item.rate)}
-            <div class="rate ps-2 text-black-50">(${item.rate.toFixed(1)})</div>
-          </div>
+          <h5 class="card-title">${strMeal}</h5>
+          <p class="card-text text-black-50">${strArea || "International"} cuisine</p>
         </div>
         <div class="card-footer p-0">
-            <button class="view-recipe-btn card-img-bottom rounded btn btn-primary" data-id="${item.id}">View Recipe</button>
+          <button class="view-recipe-btn card-img-bottom rounded btn btn-primary" data-id="${idMeal}">View Recipe</button>
         </div>
       </div>
-    </div>
-  `;
+    </div>`;
 }
 
 function setupRecipeButtons() {
-    document.querySelectorAll('.view-recipe-btn').forEach((btn) => {
-        btn.addEventListener('click', function () {
-            const id = this.dataset.id;
-            window.location.href = `recipe-viewer.html?id=${id}`;
-        });
-    });
+    document.querySelectorAll(".view-recipe-btn").forEach(btn =>
+        btn.addEventListener("click", () => {
+            window.location.href = `recipe-viewer.html?id=${btn.dataset.id}`;
+        })
+    );
 }
+
+function getEmptyMessageHTML(message) {
+    return `
+    <div class="col-12 text-center py-5">
+      <i class="fa-solid fa-triangle-exclamation fa-2xl mb-3" style="color: var(--primary-color)"></i>
+      <h3>${message}</h3>
+    </div>`;
+}
+
+document.addEventListener("DOMContentLoaded", init);

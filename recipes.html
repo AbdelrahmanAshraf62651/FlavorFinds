@@ -47,7 +47,9 @@
 
     <div class="container page mt-5" id="main">
         <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center mb-3">
-            <h2 class="mb-2 mb-md-0 me-md-auto">All Recipes</h2>
+            <div class="title">
+                <h2 class="mb-2 mb-md-0 me-md-auto">All Recipes</h2>
+            </div>
             <div class="search-filter w-100 py-3">
                 <div class="container">
                     <div class="row g-3 align-items-center">
@@ -60,32 +62,18 @@
                             <div class="dropdown w-100">
                                 <button class="btn primary-btn dropdown-toggle w-100" type="button"
                                     id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Filter: All
+                                    Type: All
                                 </button>
-                                <ul class="dropdown-menu w-100" aria-labelledby="categoryDropdown" id="categoryMenu">
-                                    <li><a class="dropdown-item" href="#" data-cat="all">All</a></li>
-                                    <li><a class="dropdown-item" href="#" data-cat="Main Dish">Main Dish</a></li>
-                                    <li><a class="dropdown-item" href="#" data-cat="Dessert">Dessert</a></li>
-                                    <li><a class="dropdown-item" href="#" data-cat="Seafood">Seafood</a></li>
-                                    <li><a class="dropdown-item" href="#" data-cat="Soup">Soup</a></li>
-                                    <li><a class="dropdown-item" href="#" data-cat="Vegan">Vegan</a></li>
-                                    <li><a class="dropdown-item" href="#" data-cat="Side Dish">Side Dish</a></li>
-                                    <li><a class="dropdown-item" href="#" data-cat="Pasta">Pasta</a></li>
-                                    <li><a class="dropdown-item" href="#" data-cat="Salad">Salad</a></li>
-                                </ul>
+                                <ul class="dropdown-menu w-100" id="categoryMenu"></ul>
                             </div>
                         </div>
-                        <div class="col-12 sm-col-6 col-md-4">
+                        <div class="col-12 sm-col-6 col-md-3">
                             <div class="dropdown w-100">
                                 <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button"
-                                    id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Sort: Popular
+                                    id="areaDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Area: All
                                 </button>
-                                <ul class="dropdown-menu w-100" aria-labelledby="sortDropdown" id="sortMenu">
-                                    <li><a class="dropdown-item" href="#" data-sort="popular">Popular</a></li>
-                                    <li><a class="dropdown-item" href="#" data-sort="alphabetical">Alphabetical</a></li>
-                                    <li><a class="dropdown-item" href="#" data-sort="quickest">Quickest Prep</a></li>
-                                </ul>
+                                <ul class="dropdown-menu w-100" id="areaMenu"></ul>
                             </div>
                         </div>
                     </div>
@@ -113,6 +101,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
         crossorigin="anonymous"></script>
+    <script src="scripts/api.js"></script>
     <script src="scripts/recipes.js"></script>
 </body>
 

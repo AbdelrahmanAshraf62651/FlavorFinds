@@ -1,85 +1,74 @@
 let allRecipes = document.querySelector(".recipes");
-let loadMoreBtn = document.getElementById('loadMoreBtn');
+let loadMoreBtn = document.getElementById("loadMoreBtn");
 let currentRecipes = [];
-let filteredWorkingSet = [];
 let renderedCount = 0;
 const PAGE_SIZE = 8;
 
-fetch("./db/recipes.json")
-    .then(res => res.json())
-    .then(recipes => {
-        currentRecipes = recipes;
-        applyStateAndRender();
-        setupSearch();
-        setupCategoryDropdown();
-        setupSortDropdown();
-        setupLoadMore();
-    })
-    .catch(() => {
-        allRecipes.innerHTML = `
-            <div class="col-12 text-center py-5">
-                <i class="fa-solid fa-triangle-exclamation fa-2xl mb-3" style="color: var(--primary-color)"></i>
-                <h3>Failed to load recipes</h3>
-            </div>`;
-    });
+let selectedCategory = "all";
+let selectedArea = "all";
 
-function renderStars(rate) {
-    let stars = "";
-    for (let i = 1; i <= 5; i++) {
-        if (rate >= i) stars += `<i class="fa-solid fa-star"></i>`;
-        else if (rate >= i - 0.5) stars += `<i class="fa-solid fa-star-half-stroke"></i>`;
-        else stars += `<i class="fa-regular fa-star"></i>`;
-    }
-    return stars;
+async function init() {
+    showSkeletons();
+    currentRecipes = await getRandomMeals(8);
+    currentRecipes = addRandomTime(currentRecipes);
+
+    displayRecipes(currentRecipes);
+    setupSearch();
+    setupCategoryDropdown();
+    setupAreaDropdown();
+    setupLoadMore();
 }
 
-function createCard(item) {
+function addRandomTime(recipes) {
+    return recipes.map(item => ({ ...item, time: 30 * (Math.floor(Math.random() * 10) + 1) }));
+}
+
+function createCard(item, category, area) {
     return `
-    <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-        <div class="card h-100 overflow-hidden" data-recipe-id="${item.id}">
+    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+        <div class="card h-100 overflow-hidden" data-recipe-id="${item.idMeal}">
             <div class="card-top position-relative">
-                <div class="position-absolute btn btn-light rounded-pill">${item.category}</div>
-                <img src="${item.image}" class="img-fluid w-100" loading="lazy" alt="${item.title}">
+                <div class="position-absolute btn btn-light rounded-pill m-2">${item.strCategory || category}</div>
+                <img src="${item.strMealThumb}" class="img-fluid w-100" loading="lazy" alt="${item.strMeal}">
             </div>
             <div class="card-body d-flex flex-column">
-                <h5 class="card-title">${item.title}</h5>
-                <p class="card-text text-black-50">${item.description}</p>
-                <div class="star-system d-flex flex-row g-1 mt-auto">
-                    ${renderStars(item.rate)}
-                    <div class="rate ps-2 text-black-50">(${item.rate.toFixed(1)})</div>
-                </div>
+                <h5 class="card-title">${item.strMeal}</h5>
+                <p class="card-text text-black-50">${item.strArea || area} cuisine</p>
             </div>
             <div class="card-footer p-0 d-flex flex-row align-items-center justify-content-between">
                 <div class="clock d-flex flex-row align-items-center">
                     <i class="fa-regular fa-clock me-1"></i>
-                    <div class="clock-num text-black-50">${item.prepTime}</div>
+                    <div class="clock-num text-black-50">${item.time} Min</div>
                 </div>
-                <button class="view-recipe-btn card-img-bottom rounded btn btn-primary" data-id="${item.id}">View Recipe</button>
+                <button class="view-recipe-btn card-img-bottom rounded btn btn-primary" data-id="${item.idMeal}">View Recipe</button>
             </div>
         </div>
     </div>
     `;
 }
 
+function showSkeletons(count = 4) {
+    allRecipes.innerHTML = "";
+    for (let i = 0; i < count; i++) {
+        allRecipes.innerHTML += `
+        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+            <div class="card h-100 placeholder-glow">
+                <div class="placeholder w-100 h-100" style="height: 100%; min-height: 450px;"></div>
+            </div>
+        </div>`;
+    }
+}
+
 function setupRecipeButtons() {
-    document.querySelectorAll('.view-recipe-btn').forEach(btn => {
-        btn.addEventListener('click', function () {
+    document.querySelectorAll(".view-recipe-btn").forEach(btn => {
+        btn.addEventListener("click", function () {
             const id = this.dataset.id;
             window.location.href = `recipe-viewer.html?id=${id}`;
         });
     });
 }
 
-function convertTimeToMinutes(timeStr) {
-    const hrMatch = timeStr.match(/(\d+)\s*hr/);
-    const minMatch = timeStr.match(/(\d+)\s*min/);
-    let totalMinutes = 0;
-    if (hrMatch) totalMinutes += parseInt(hrMatch[1]) * 60;
-    if (minMatch) totalMinutes += parseInt(minMatch[1]);
-    return totalMinutes;
-}
-
-function displayRecipes(recipes) {
+function displayRecipes(recipes, category, area) {
     if (!recipes.length) {
         allRecipes.innerHTML = `
             <div class="col-12 text-center py-5">
@@ -87,114 +76,129 @@ function displayRecipes(recipes) {
                 <h3>No recipes found</h3>
                 <p class="text-black-50">Try adjusting your search or filters</p>
             </div>`;
-        loadMoreBtn.classList.add('d-none');
+        loadMoreBtn.classList.add("d-none");
         return;
     }
 
     const slice = recipes.slice(0, renderedCount || PAGE_SIZE);
     renderedCount = slice.length;
 
-    allRecipes.innerHTML = '';
-    slice.forEach(recipe => allRecipes.innerHTML += createCard(recipe));
+    allRecipes.innerHTML = "";
+    slice.forEach(recipe => allRecipes.innerHTML += createCard(recipe, category, area));
 
     setupRecipeButtons();
     toggleLoadMore(recipes.length);
 }
 
 function toggleLoadMore(total) {
-    if (renderedCount < total) loadMoreBtn.classList.remove('d-none');
-    else loadMoreBtn.classList.add('d-none');
+    if (renderedCount < total) loadMoreBtn.classList.remove("d-none");
+    else loadMoreBtn.classList.add("d-none");
 }
 
 function setupSearch() {
-    const input = document.getElementById('recipesSearch');
-    input.addEventListener('input', function () {
+    const input = document.getElementById("recipesSearch");
+    input.addEventListener("input", async function () {
         const term = this.value.toLowerCase();
-        filteredWorkingSet = currentRecipes.filter(r =>
-            r.title.toLowerCase().includes(term) ||
-            r.description.toLowerCase().includes(term) ||
-            r.category.toLowerCase().includes(term)
-        );
-        applySortFromDropdown();
+        showSkeletons();
+        const results = await searchForRecipes(term);
+        currentRecipes = addRandomTime(results);
+
+        selectedCategory = "all";
+        selectedArea = "all";
         renderedCount = 0;
-        displayRecipes(filteredWorkingSet);
+        displayRecipes(currentRecipes);
     });
 }
+async function setupCategoryDropdown() {
+    const catList = await categoryFilter();
+    const catMenu = document.getElementById("categoryMenu");
 
-function setupCategoryDropdown() {
-    const menuItems = document.querySelectorAll('#categoryMenu .dropdown-item');
-    menuItems.forEach(item => {
-        item.addEventListener('click', function (e) {
+    catMenu.innerHTML = `
+    <div class="dropdown-scrollable" style="max-height: 200px; overflow-y: auto;">
+        <a class="dropdown-item" href="#" data-cat="all">All</a>
+        ${catList.map(cat => `<a class="dropdown-item" href="#" data-cat="${cat.strCategory}">${cat.strCategory}</a>`).join('')}
+    </div>`;
+
+    document.querySelectorAll("#categoryMenu .dropdown-item").forEach(item => {
+        item.addEventListener("click", function (e) {
             e.preventDefault();
-            const selected = this.dataset.cat;
-            document.getElementById('categoryDropdown').textContent = `Filter: ${this.textContent}`;
-
-            const searchVal = document.getElementById('recipesSearch').value.toLowerCase();
-            filteredWorkingSet = currentRecipes.filter(r =>
-                (!searchVal || r.title.toLowerCase().includes(searchVal) ||
-                    r.description.toLowerCase().includes(searchVal) ||
-                    r.category.toLowerCase().includes(searchVal))
-            );
-
-            if (selected !== 'all') {
-                filteredWorkingSet = filteredWorkingSet.filter(r => r.category === selected);
-            }
-
-            renderedCount = 0;
-            applySortFromDropdown();
-            displayRecipes(filteredWorkingSet);
+            selectedCategory = this.dataset.cat;
+            document.getElementById("categoryDropdown").textContent = `Type: ${this.textContent}`;
+            applyFilters();
         });
     });
 }
 
-function setupSortDropdown() {
-    const menuItems = document.querySelectorAll('#sortMenu .dropdown-item');
-    menuItems.forEach(item => {
-        item.addEventListener('click', function (e) {
+async function setupAreaDropdown() {
+    const areaList = await areaFilter();
+    const areaMenu = document.getElementById("areaMenu");
+
+    areaMenu.innerHTML = `
+    <div class="dropdown-scrollable" style="max-height: 200px; overflow-y: auto;">
+        <a class="dropdown-item" href="#" data-area="all">All</a>
+        ${areaList.map(area => `<a class="dropdown-item" href="#" data-area="${area.strArea}">${area.strArea}</a>`).join('')}
+    </div>`;
+
+    document.querySelectorAll("#areaMenu .dropdown-item").forEach(item => {
+        item.addEventListener("click", function (e) {
             e.preventDefault();
-            document.getElementById('sortDropdown').textContent = `Sort: ${this.textContent}`;
-            applySortFromDropdown();
-            renderedCount = 0;
-            displayRecipes(filteredWorkingSet.length ? filteredWorkingSet : currentRecipes);
+            selectedArea = this.dataset.area;
+            document.getElementById("areaDropdown").textContent = `Area: ${this.textContent}`;
+            applyFilters();
         });
     });
 }
 
-function applySortFromDropdown() {
-    const sort = document.getElementById('sortDropdown').textContent.replace('Sort: ', '').toLowerCase();
-    let list = filteredWorkingSet.length ? filteredWorkingSet : currentRecipes;
+async function applyFilters() {
+    showSkeletons();
+    let recipes = [];
 
-    switch (sort) {
-        case 'popular':
-            list.sort((a, b) => b.rate - a.rate);
-            break;
-        case 'alphabetical':
-            list.sort((a, b) => a.title.localeCompare(b.title));
-            break;
-        case 'quickest prep':
-            list.sort((a, b) => convertTimeToMinutes(a.prepTime) - convertTimeToMinutes(b.prepTime));
-            break;
+    if (selectedCategory !== "all") {
+        recipes = await fetchByCategory(selectedCategory);
     }
 
-    filteredWorkingSet = list;
+    if (selectedArea !== "all") {
+        const areaRecipes = await fetchByArea(selectedArea);
+        if (selectedCategory !== "all") {
+            const ids = new Set(areaRecipes.map(r => r.idMeal));
+            recipes = recipes.filter(r => ids.has(r.idMeal));
+        } else {
+            recipes = areaRecipes;
+        }
+    }
+
+    if (selectedCategory === "all" && selectedArea === "all") {
+        recipes = await getRandomMeals(10);
+    }
+
+    currentRecipes = addRandomTime(recipes);
+    renderedCount = 0;
+
+    if (selectedCategory === "all" && selectedArea === "all") {
+        displayRecipes(currentRecipes);
+    } else {
+        let passedCat = selectedCategory !== "all" ? selectedCategory : "General";
+        let passedArea = selectedArea !== "all" ? selectedArea : "General";
+        displayRecipes(currentRecipes, passedCat, passedArea);
+    }
 }
 
 function setupLoadMore() {
-    loadMoreBtn.addEventListener('click', function () {
-        const data = filteredWorkingSet.length ? filteredWorkingSet : currentRecipes;
+    loadMoreBtn.addEventListener("click", function () {
+        const data = currentRecipes;
         const nextCount = Math.min(data.length, renderedCount + PAGE_SIZE);
         const nextSlice = data.slice(0, nextCount);
         renderedCount = nextSlice.length;
 
-        allRecipes.innerHTML = '';
-        nextSlice.forEach(recipe => allRecipes.innerHTML += createCard(recipe));
+        let passedCat = selectedCategory !== "all" ? selectedCategory : "General";
+        let passedArea = selectedArea !== "all" ? selectedArea : "General";
+
+        allRecipes.innerHTML = "";
+        nextSlice.forEach(recipe => allRecipes.innerHTML += createCard(recipe, passedCat, passedArea));
+
         setupRecipeButtons();
         toggleLoadMore(data.length);
     });
 }
 
-function applyStateAndRender() {
-    filteredWorkingSet = [...currentRecipes];
-    renderedCount = 0;
-    displayRecipes(filteredWorkingSet);
-}
+document.addEventListener("DOMContentLoaded", init);
