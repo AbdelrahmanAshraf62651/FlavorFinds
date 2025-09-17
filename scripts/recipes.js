@@ -63,7 +63,8 @@ function showSkeletons(count = 4) {
 
 function setupRecipeButtons() {
     document.querySelectorAll(".view-recipe-btn").forEach(btn => {
-        btn.addEventListener("click", function () {
+        btn.addEventListener("click", function (e) {
+            e.stopPropagation();
             const id = this.dataset.id;
             if (id) {
                 window.location.href = `recipe-viewer.html?id=${id}`;
@@ -72,12 +73,14 @@ function setupRecipeButtons() {
     });
 
     document.querySelectorAll(".recipe-card").forEach(card => {
-        card.addEventListener("click", function (e) {
-            if (e.target.closest("button")) return;
-            const id = this.dataset.id;
-            if (id) {
-                window.location.href = `recipe-viewer.html?id=${id}`;
-            }
+        ["click", "touchend"].forEach(evt => {
+            card.addEventListener(evt, function (e) {
+                if (e.target.closest("button")) return; 
+                const id = this.dataset.id;
+                if (id) {
+                    window.location.href = `recipe-viewer.html?id=${id}`;
+                }
+            });
         });
     });
 }
