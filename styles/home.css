@@ -19,9 +19,9 @@
 
 .landing h1 {
     font-family: "Lora", serif;
-    font-size: 60px; 
-    line-height: 75px; 
-    font-weight: 800; 
+    font-size: 60px;
+    line-height: 75px;
+    font-weight: 800;
     max-width: 900px;
     color: #F3F4F6FF;
     text-shadow: var(--primary-color) 1px 1px;
@@ -55,18 +55,14 @@
     left: 15px;
     font-weight: 500;
     font-size: 12px;
-    transition: all ease-in-out 0.2s;
-}
-
-.card .card-top .btn:hover {
-    background-color: rgba(255, 255, 255, 0) !important;
+    background-color: rgba(255, 255, 255, 0.4) !important;
     border: rgba(255, 255, 255, 0) solid 1px !important;
 }
 
 .card .card-body .card-title {
     max-height: 192px;
     font-family: "Lora", serif;
-    line-height: 28px; 
+    line-height: 28px;
     font-weight: 600;
 }
 
@@ -77,8 +73,8 @@
 }
 
 .card .card-footer button {
-    background-color: var(--primary-color)!important;
-    border: none!important;
+    background-color: var(--primary-color) !important;
+    border: none !important;
     border-radius: 0px 0px 6px 6px;
     font-weight: 500;
     transition: all ease-in-out 0.2s;
@@ -90,4 +86,12 @@
 
 .card-footer {
     border: none;
+}
+
+@media (max-width: 580px) {
+    .card .card-top .btn {
+        font-size: 10px;
+        top: 10px;
+        left: 5px;
+    }
 }

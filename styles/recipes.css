@@ -28,11 +28,7 @@
     left: 15px;
     font-weight: 500;
     font-size: 12px;
-    transition: all ease-in-out 0.2s;
-}
-
-.card .card-top .btn:hover {
-    background-color: rgba(255, 255, 255, 0) !important;
+    background-color: rgba(255, 255, 255, 0.4) !important;
     border: rgba(255, 255, 255, 0) solid 1px !important;
 }
 
@@ -87,4 +83,12 @@
 .search-filter .grey-btn:hover {
     background-color: var(--primary-color);
     color: white;
+}
+
+@media (max-width: 580px) {
+    .card .card-top .btn {
+        font-size: 10px;
+        top: 10px;
+        left: 5px;
+    }
 }

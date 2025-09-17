@@ -59,7 +59,7 @@ function createCard({ idMeal, strMeal, strMealThumb, strCategory, strArea }) {
     <div class="col-6 col-md-4 col-xl-3 mb-4">
       <div class="card h-100 overflow-hidden">
         <div class="card-top position-relative">
-          <div class="position-absolute btn btn-light rounded-pill">${strCategory || "General"}</div>
+          <div class="position-absolute btn btn-light rounded-pill m-2">${strCategory || "General"}</div>
           <img src="${strMealThumb}" class="img-fluid w-100" loading="lazy" alt="${strMeal}">
         </div>
         <div class="card-body d-flex flex-column">

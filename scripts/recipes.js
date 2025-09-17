@@ -40,7 +40,7 @@ function createCard(item, category, area) {
                     <i class="fa-regular fa-clock me-1"></i>
                     <div class="clock-num text-black-50">${item.time} Min</div>
                 </div>
-                <button class="view-recipe-btn card-img-bottom  rounded btn btn-primary" data-id="${item.idMeal}">
+                <button class="view-recipe-btn card-img-bottom rounded btn btn-primary" data-id="${item.idMeal}">
                     View Recipe
                 </button>
             </div>
