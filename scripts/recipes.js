@@ -73,14 +73,12 @@ function setupRecipeButtons() {
     });
 
     document.querySelectorAll(".recipe-card").forEach(card => {
-        ["click", "touchend"].forEach(evt => {
-            card.addEventListener(evt, function (e) {
-                if (e.target.closest("button")) return; 
-                const id = this.dataset.id;
-                if (id) {
-                    window.location.href = `recipe-viewer.html?id=${id}`;
-                }
-            });
+        card.addEventListener("click", function (e) {
+            if (e.target.closest("button")) return;
+            const id = this.dataset.id;
+            if (id) {
+                window.location.href = `recipe-viewer.html?id=${id}`;
+            }
         });
     });
 }
