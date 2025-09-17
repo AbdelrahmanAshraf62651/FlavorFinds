@@ -25,7 +25,7 @@ function addRandomTime(recipes) {
 
 function createCard(item, category, area) {
     return `
-    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+    <div class="col-6 col-md-4 col-xl-3 mb-4">
         <div class="card h-100 overflow-hidden" data-recipe-id="${item.idMeal}">
             <div class="card-top position-relative">
                 <div class="position-absolute btn btn-light rounded-pill m-2">${item.strCategory || category}</div>
@@ -35,12 +35,14 @@ function createCard(item, category, area) {
                 <h5 class="card-title">${item.strMeal}</h5>
                 <p class="card-text text-black-50">${item.strArea || area} cuisine</p>
             </div>
-            <div class="card-footer p-0 d-flex flex-row align-items-center justify-content-between">
-                <div class="clock d-flex flex-row align-items-center">
+            <div class="card-footer p-0 d-flex flex-column flex-sm-row align-items-center justify-content-between">
+                <div class="clock d-flex flex-row align-items-center mb-2 mb-sm-0">
                     <i class="fa-regular fa-clock me-1"></i>
                     <div class="clock-num text-black-50">${item.time} Min</div>
                 </div>
-                <button class="view-recipe-btn card-img-bottom rounded btn btn-primary" data-id="${item.idMeal}">View Recipe</button>
+                <button class="view-recipe-btn card-img-bottom  rounded btn btn-primary" data-id="${item.idMeal}">
+                    View Recipe
+                </button>
             </div>
         </div>
     </div>
@@ -51,7 +53,7 @@ function showSkeletons(count = 4) {
     allRecipes.innerHTML = "";
     for (let i = 0; i < count; i++) {
         allRecipes.innerHTML += `
-        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+        <div class="col-6 col-md-4 col-xl-3 mb-4">  
             <div class="card h-100 placeholder-glow">
                 <div class="placeholder w-100 h-100" style="height: 100%; min-height: 450px;"></div>
             </div>

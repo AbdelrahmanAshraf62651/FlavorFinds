@@ -15,7 +15,7 @@ function renderFavoritesSkeleton(container, count = 4) {
     container.innerHTML = "";
     for (let i = 0; i < count; i++) {
         const skeleton = document.createElement("div");
-        skeleton.className = "col-12 col-sm-6 col-lg-4 col-xl-3 mb-4";
+        skeleton.className = "col-6 col-md-4 col-xl-3 mb-4";
         skeleton.innerHTML = `
             <div class="card h-100 placeholder-glow">
                 <div class="w-100 h-100 bg-secondary placeholder" style="min-height: 450px;"></div>
@@ -40,7 +40,7 @@ function loadFavorites() {
 
     favs.forEach((recipe, index) => {
         const card = document.createElement("div");
-        card.className = "col-12 col-sm-6 col-lg-4 col-xl-3 mb-3";
+        card.className = "col-6 col-md-4 col-xl-3 mb-4";
         card.innerHTML = `
             <div class="card h-100 overflow-hidden">
             <div class="card-top position-relative">
@@ -48,7 +48,7 @@ function loadFavorites() {
             </div>
             <div class="card-body d-flex flex-column">
                 <h5 class="card-title">${recipe.strMeal}</h5>
-                <p class="card-text text-black-50">${recipe.strInstructions ? recipe.strInstructions.slice(0, 100) + "..." : "Delicious recipe from TheMealDB"}</p>
+                <p class="card-text text-black-50">${recipe.strInstructions ? recipe.strInstructions.slice(0, 50) + "..." : "Delicious recipe from TheMealDB"}</p>
             </div>
             <div class="card-footer p-0 d-flex flex-column align-items-center justify-content-between">
                 <button class="view-recipe-btn card-img-bottom rounded btn btn-primary mb-2" data-id="${recipe.idMeal}">View Recipe</button>

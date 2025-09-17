@@ -9,7 +9,7 @@ function renderSkeletons(container, count) {
     container.innerHTML = "";
     for (let i = 0; i < count; i++) {
         container.innerHTML += `
-        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+        <div class="col-6 col-md-4 col-xl-3 mb-4">
             <div class="card h-100 placeholder-glow">
                 <div class="placeholder w-100 h-100" style="height: 100%; min-height: 450px;"></div>
             </div>
@@ -56,7 +56,7 @@ function init() {
 
 function createCard({ idMeal, strMeal, strMealThumb, strCategory, strArea }) {
     return `
-    <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+    <div class="col-6 col-md-4 col-xl-3 mb-4">
       <div class="card h-100 overflow-hidden">
         <div class="card-top position-relative">
           <div class="position-absolute btn btn-light rounded-pill">${strCategory || "General"}</div>
