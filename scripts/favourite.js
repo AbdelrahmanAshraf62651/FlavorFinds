@@ -42,20 +42,22 @@ function loadFavorites() {
         const card = document.createElement("div");
         card.className = "col-6 col-md-4 col-xl-3 mb-4";
         card.innerHTML = `
-            <div class="card h-100 overflow-hidden">
-            <div class="card-top position-relative">
-                <img src="${recipe.strMealThumb}" class="img-fluid w-100" loading="lazy" alt="${recipe.strMeal}">
-            </div>
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title">${recipe.strMeal}</h5>
-                <p class="card-text text-black-50">${recipe.strInstructions ? recipe.strInstructions.slice(0, 50) + "..." : "Delicious recipe from TheMealDB"}</p>
-            </div>
-            <div class="card-footer p-0 d-flex flex-column align-items-center justify-content-between">
-                <button class="view-recipe-btn card-img-bottom rounded btn btn-primary mb-2" data-id="${recipe.idMeal}">View Recipe</button>
-                <button class="card-img-bottom rounded btn btn-outline-secondary" onclick="removeFavorite(${index})">
-                Remove from Favorites
-                </button>
-            </div>
+            <div class="card h-100 overflow-hidden recipe-card" data-id="${recipe.idMeal}" style="cursor:pointer;">
+                <div class="card-top position-relative">
+                    <img src="${recipe.strMealThumb}" class="img-fluid w-100" loading="lazy" alt="${recipe.strMeal}">
+                </div>
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">${recipe.strMeal}</h5>
+                    <p class="card-text text-black-50">
+                        ${recipe.strInstructions ? recipe.strInstructions.slice(0, 50) + "..." : "Delicious recipe from TheMealDB"}
+                    </p>
+                </div>
+                <div class="card-footer p-0 d-flex flex-column align-items-center justify-content-between">
+                    <button class="view-recipe-btn card-img-bottom rounded btn btn-primary mb-2" data-id="${recipe.idMeal}">View Recipe</button>
+                    <button class="remove-fav-btn card-img-bottom rounded btn btn-outline-secondary" data-index="${index}">
+                        Remove from Favorites
+                    </button>
+                </div>
             </div>`;
         container.appendChild(card);
     });
@@ -66,10 +68,21 @@ function loadFavorites() {
 }
 
 function setupRecipeButtons() {
-    document.querySelectorAll(".view-recipe-btn").forEach((btn) => {
-        btn.addEventListener("click", function () {
-            const id = this.dataset.id;
-            window.location.href = `recipe-viewer.html?id=${id}`;
+    document.querySelectorAll(".view-recipe-btn, .recipe-card").forEach(el => {
+        el.addEventListener("click", function (e) {
+            if (e.target.closest(".remove-fav-btn")) return;
+
+            const id = this.dataset.id || this.getAttribute("data-id");
+            if (id) {
+                window.location.href = `recipe-viewer.html?id=${id}`;
+            }
+        });
+    });
+    document.querySelectorAll(".remove-fav-btn").forEach(btn => {
+        btn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            const index = this.dataset.index;
+            removeFavorite(index);
         });
     });
 }
@@ -77,6 +90,10 @@ function setupRecipeButtons() {
 function removeFavorite(index) {
     let favs = JSON.parse(localStorage.getItem("favItems") || "[]");
     favs.splice(index, 1);
+    if(favs.length == 0) {
+        const clearBtn = document.querySelector("#clearAllFavs");
+        if (clearBtn) clearBtn.style.display = "none";
+    }
     localStorage.setItem("favItems", JSON.stringify(favs));
     loadFavorites();
 }

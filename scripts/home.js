@@ -57,7 +57,7 @@ function init() {
 function createCard({ idMeal, strMeal, strMealThumb, strCategory, strArea }) {
     return `
     <div class="col-6 col-md-4 col-xl-3 mb-4">
-      <div class="card h-100 overflow-hidden">
+      <div class="card h-100 overflow-hidden recipe-card" data-id="${idMeal}" style="cursor:pointer;">
         <div class="card-top position-relative">
           <div class="position-absolute btn btn-light rounded-pill m-2">${strCategory || "General"}</div>
           <img src="${strMealThumb}" class="img-fluid w-100" loading="lazy" alt="${strMeal}">
@@ -74,9 +74,12 @@ function createCard({ idMeal, strMeal, strMealThumb, strCategory, strArea }) {
 }
 
 function setupRecipeButtons() {
-    document.querySelectorAll(".view-recipe-btn").forEach(btn =>
-        btn.addEventListener("click", () => {
-            window.location.href = `recipe-viewer.html?id=${btn.dataset.id}`;
+    document.querySelectorAll(".view-recipe-btn, .recipe-card").forEach(el =>
+        el.addEventListener("click", () => {
+            const id = el.dataset.id;
+            if (id) {
+                window.location.href = `recipe-viewer.html?id=${id}`;
+            }
         })
     );
 }

@@ -26,7 +26,7 @@ function addRandomTime(recipes) {
 function createCard(item, category, area) {
     return `
     <div class="col-6 col-md-4 col-xl-3 mb-4">
-        <div class="card h-100 overflow-hidden" data-recipe-id="${item.idMeal}">
+        <div class="card h-100 overflow-hidden recipe-card" data-id="${item.idMeal}" style="cursor:pointer;">
             <div class="card-top position-relative">
                 <div class="position-absolute btn btn-light rounded-pill m-2">${item.strCategory || category}</div>
                 <img src="${item.strMealThumb}" class="img-fluid w-100" loading="lazy" alt="${item.strMeal}">
@@ -65,7 +65,19 @@ function setupRecipeButtons() {
     document.querySelectorAll(".view-recipe-btn").forEach(btn => {
         btn.addEventListener("click", function () {
             const id = this.dataset.id;
-            window.location.href = `recipe-viewer.html?id=${id}`;
+            if (id) {
+                window.location.href = `recipe-viewer.html?id=${id}`;
+            }
+        });
+    });
+
+    document.querySelectorAll(".recipe-card").forEach(card => {
+        card.addEventListener("click", function (e) {
+            if (e.target.closest("button")) return;
+            const id = this.dataset.id;
+            if (id) {
+                window.location.href = `recipe-viewer.html?id=${id}`;
+            }
         });
     });
 }
